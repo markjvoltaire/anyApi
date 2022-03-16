@@ -11,4 +11,15 @@ describe('anyApi routes', () => {
   afterAll(() => {
     pool.end();
   });
+  it('should create a pizza', async () => {
+    const res = await request(app)
+      .post('/api/v1/pizzas')
+      .send({ toppings: 'beef', cheese: 'swiss cheese' });
+
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      toppings: 'beef',
+      cheese: 'swiss cheese',
+    });
+  });
 });
