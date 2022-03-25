@@ -44,4 +44,11 @@ describe('anyApi routes', () => {
 
     expect(response.body).toEqual(expected);
   });
+
+  it('should get all pizzas', async () => {
+    const expected = await Pizza.getAll();
+    const res = await request(app).get('/api/v1/pizzas');
+
+    expect(res.body).toEqual(expected);
+  });
 });
