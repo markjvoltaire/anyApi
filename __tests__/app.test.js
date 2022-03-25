@@ -42,6 +42,8 @@ describe('anyApi routes', () => {
       .patch('/api/v1/pizzas/1')
       .send({ cheese: 'mozerallia' });
 
+    console.log('response', response);
+
     expect(response.body).toEqual(expected);
   });
 
@@ -50,5 +52,19 @@ describe('anyApi routes', () => {
     const res = await request(app).get('/api/v1/pizzas');
 
     expect(res.body).toEqual(expected);
+  });
+
+  it('should get pizza by id', async () => {
+    const expected = await Pizza.getById(1);
+    const res = await request(app).get(`/api/v1/pizzas/${expected.id}`);
+
+    expect(res.body).toEqual(expected);
+  });
+
+  it('deletes a pizza by id', async () => {
+    const expected = await Pizza.deletePizza(1);
+    const res = await request(app).delete('/api/v1/pizzas/1');
+
+    expect(expected).not.toContain(res.body);
   });
 });

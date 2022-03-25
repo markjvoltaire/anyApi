@@ -7,3 +7,5 @@ CREATE TABLE pizza (
     toppings TEXT NOT NULL,
     cheese TEXT NOT NULL
 );
+
+INSERT INTO pizza (toppings, cheese) VALUES ( 'ham', 'swiss');
